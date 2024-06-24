@@ -1,0 +1,129 @@
+<html>
+<head>
+    <!-- PyScript: https://github.com/pyscript/pyscript/releases -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
+    <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+    <!-- Bootstrap: https://getbootstrap.com -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- local Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <py-config>
+        packages = []
+        [[fetch]]
+        files = [ "main.py" , "snake_hamiltonian_cycle/hamiltonian.py", "snake_hamiltonian_cycle/snake.py"]
+    </py-config>
+</head>
+<body>
+    <!-- Healthy Spacing -->
+    <br>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col logo-flex-col">
+                    <img py-click="window.location.href = 'https://jtexpo.github.io'" src="../assets/images/jtexpo.png"
+                        alt="" class="logo-img">
+                    <a href="https://jtexpo.github.io" class="display-3 logo-main-text">JTexpo</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="display-4 text-center">
+                        <a href="https://www.youtube.com/@JTexpo" target="_blank" class="logo-sub-text">
+                            Content To Tr<span style="color: #F3AF56;">AI</span>n Your Brain
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Healthy Spacing -->
+    <br>
+    <br>
+    <!-- SNAKE AI -->
+    <main>
+        <div class="container">
+            <div class="row">
+                <canvas id="snake-game" class="mx-auto" width="600" height="600" style="align-content: center;"></canvas>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-warning" py-click="reset()">RESET</button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-dark" py-click="toggle_mode(SPIKES_MODE_KEY)">Spike</button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-danger" py-click="toggle_mode(APPLE_MODE_KEY)">Apple</button>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-block btn-light" py-click="toggle_mode(ERASE_MODE_KEY)">Erase</button>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8">
+                    <button class="btn btn-block btn-success" py-click="toggle_snake_move_view()">Show Snake Moves</button>
+                </div>
+                <div class="col-sm-2"></div>
+            </div>
+            <!-- Healthy Spacing -->
+            <br>
+            <br>
+            <br>
+            <!-- Explination -->
+            <!-- How to use this app -->
+            <div class="row">
+                <div class="h2 info-header">How to use this app</div>
+            </div>
+            <div class="row">
+                <div class="h4 info-body">
+                    Upon entering the webpage, you will notice the classic Snake game running. 
+                    There are five buttons available: RESET, Spike, Apple, Erase, and "Show Snake Moves." <br><br>
+                    <ul>
+                        <li>The RESET button will reset the game entirely.</li>
+                        <li>The Spike button allows you to place a spike in the snake's path, change the snakes route.</li>
+                        <li>The Apple button will place an apple for the snake to eat, which will increase its size.</li>
+                        <li>The Erase button removes a spike or apple from the game.</li>
+                        <li>The "Show Snake Moves" button will display a second canvas below, showing the Hamiltonian cycle that the snake is following.</li>
+                    </ul>
+                </div>
+            </div>
+            <br>
+            <!-- What is a RNN -->
+            <div class="row">
+                <div class="h2 info-header">What is a Hamiltonian Cycle?</div>
+            </div>
+            <div class="row">
+                <div class="h4 info-body">
+                    A Hamiltonian cycle is a path in a graph that visits every node exactly once. <br><br>
+                    In the game Snake, a Hamiltonian cycle can help determine the most optimal path for the snake to follow without colliding with its own body. 
+                    This cycle is NP-Hard, which means that it can take an impractically long time to find a solution. 
+                    Thus, the game is limited to a 6x6 grid in order to provide the most fluid gameplay. <br><br>
+                    The snake will dynamically generate a new Hamiltonian cycle whenever a spike is placed or removed.
+                    A depth first search will be used to find the longest Hamiltonian cycle, making a circut which connects the snakes head to it's tail. <br><br>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Healthy Spacing -->
+    <br>
+    <br>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="h4 footer-rights">&copy; 2024 Justin Tyler Esposito. All rights Reserved.</div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <py-script src="./main.py"></py-script>
+</body>
+</html>
